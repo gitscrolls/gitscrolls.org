@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The GitScrolls - Scroll</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="src/markdown/markdown-processor-browser.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --parchment: #f4f1e8;
+            --dark-parchment: #e8e2d0;
+            --bronze: #cd7f32;
+            --dark-bronze: #b8651c;
+            --ancient-gold: #d4af37;
+            --charcoal: #2c2c2c;
+            --scroll-shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(45deg, var(--parchment) 0%, var(--dark-parchment) 100%);
+            background-attachment: fixed;
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(244, 241, 232, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--bronze);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--bronze);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--dark-bronze);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: 'Cinzel', serif;
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--bronze);
+        }
+
+        /* Scroll Container */
+        .scroll-container {
+            max-width: 900px;
+            margin: 120px auto 4rem;
+            padding: 0 2rem;
+        }
+
+        .scroll-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--bronze);
+        }
+
+        .scroll-number {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--bronze);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .scroll-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            font-style: italic;
+            color: var(--bronze);
+        }
+
+        .error {
+            text-align: center;
+            padding: 4rem;
+            color: #d32f2f;
+            background: #ffebee;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        /* Scroll Content Styles */
+        .scroll-content {
+            background: white;
+            padding: 4rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--dark-parchment);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(205, 127, 50, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(232, 226, 208, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .scroll-content > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Markdown Content Styling */
+        .scroll-content h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--bronze);
+            margin: 3rem 0 1.5rem;
+            font-weight: 700;
+        }
+
+        .scroll-content h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--dark-bronze);
+            margin: 2.5rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .scroll-content h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+        }
+
+        .scroll-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .scroll-content blockquote {
+            border-left: 4px solid var(--bronze);
+            padding-left: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--dark-bronze);
+            font-size: 1.2rem;
+        }
+
+        .scroll-content code {
+            background: var(--dark-parchment);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .scroll-content pre {
+            background: var(--charcoal);
+            color: var(--parchment);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .scroll-content pre code {
+            background: none;
+            padding: 0;
+            color: var(--parchment);
+        }
+
+        .scroll-content em {
+            font-style: italic;
+            color: var(--dark-bronze);
+        }
+
+        .scroll-content strong {
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        /* Navigation */
+        .scroll-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding: 2rem 0;
+            border-top: 2px solid var(--bronze);
+        }
+
+        .nav-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--bronze);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--dark-bronze);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(205, 127, 50, 0.3);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-parchment);
+            padding: 2rem;
+            text-align: center;
+            border-top: 3px solid var(--bronze);
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .scroll-content {
+                padding: 2rem;
+            }
+            
+            .scroll-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">THE GITSCROLLS</a>
+            <ul class="nav-links">
+                <li><a href="index.html#scrolls">The Scrolls</a></li>
+                <li><a href="index.html#community">Community</a></li>
+                <li><a href="https://github.com/gitscrolls/gitscrolls">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Scroll Container -->
+    <div class="scroll-container">
+        <div class="scroll-header">
+            <div class="scroll-number" id="scrollNumber">SCROLL</div>
+            <h1 class="scroll-title" id="scrollTitle">Loading...</h1>
+        </div>
+
+        <div id="scrollContent" class="loading">
+            Unfurling the ancient scroll...
+        </div>
+
+        <nav class="scroll-nav" id="scrollNav" style="display: none;">
+            <a href="#" class="nav-button" id="prevScroll">← Previous Scroll</a>
+            <a href="#" class="nav-button" id="nextScroll">Next Scroll →</a>
+        </nav>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>"Stop reading. Start helping. The circle is not complete. Your turn is here."</p>
+    </footer>
+
+    <script>
+        // Scroll metadata
+        const scrolls = [
+            { number: 1, file: '01-Unbroken-Line.md', title: 'The Unbroken Line' },
+            { number: 2, file: '02-Chronicle-Forgotten-Messages.md', title: 'Chronicle of Forgotten Messages' },
+            { number: 3, file: '03-Oracle-Testament.md', title: 'Oracle\'s Testament of Devotion' },
+            { number: 4, file: '04-Schism-Scrolls.md', title: 'The Schism Scrolls' },
+            { number: 5, file: '05-Wounding-Hubris.md', title: 'The Wounding of Hubris' },
+            { number: 6, file: '06-Songs-Chaos-Sirens.md', title: 'Songs of the Chaos Sirens' },
+            { number: 7, file: '07-Between-Monsters-Time.md', title: 'Between the Monsters of Time' },
+            { number: 8, file: '08-Ancient-Reviewer.md', title: 'Before the Ancient Reviewer' },
+            { number: 9, file: '09-Commandments-Wise.md', title: 'Commandments of the Wise' },
+            { number: 10, file: '10-Where-Heroes-Die.md', title: 'Where Heroes Go to Die' }
+        ];
+
+        // Get scroll number from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const scrollNum = parseInt(urlParams.get('scroll')) || 1;
+        const currentScroll = scrolls.find(s => s.number === scrollNum) || scrolls[0];
+
+        // Update header
+        document.getElementById('scrollNumber').textContent = `SCROLL ${currentScroll.number < 10 ? 'I'.repeat(currentScroll.number) : 'X'}`;
+        document.getElementById('scrollTitle').textContent = currentScroll.title;
+        document.title = `The GitScrolls - ${currentScroll.title}`;
+
+        // Fetch and render markdown
+        async function loadScroll() {
+            const contentDiv = document.getElementById('scrollContent');
+            const navDiv = document.getElementById('scrollNav');
+            
+            try {
+                const response = await fetch(`https://raw.githubusercontent.com/gitscrolls/gitscrolls/refs/heads/main/scrolls/${currentScroll.file}`);
+                if (!response.ok) throw new Error('Failed to fetch scroll');
+                
+                const rawMarkdown = await response.text();
+                
+                // Process the markdown
+                const processor = new MarkdownProcessor();
+                const processed = processor.process(rawMarkdown);
+                
+                // Update the title if we extracted one
+                if (processed.title) {
+                    document.getElementById('scrollTitle').textContent = processed.title;
+                }
+                
+                // For now, just render the processed content
+                // (We'll add hero section with quote/poem in next phase)
+                const html = marked.parse(processed.content);
+                
+                contentDiv.className = 'scroll-content';
+                contentDiv.innerHTML = html;
+                
+                // Log what we extracted for debugging
+                console.log('Extracted components:', {
+                    title: processed.title,
+                    quote: processed.quote,
+                    poem: processed.poem
+                });
+                
+                // Setup navigation
+                setupNavigation();
+                navDiv.style.display = 'flex';
+                
+                // Smooth scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+            } catch (error) {
+                contentDiv.className = 'error';
+                contentDiv.innerHTML = `
+                    <h2>The scroll could not be retrieved</h2>
+                    <p>${error.message}</p>
+                    <p>Perhaps the ancient servers are resting...</p>
+                `;
+            }
+        }
+
+        function setupNavigation() {
+            const prevBtn = document.getElementById('prevScroll');
+            const nextBtn = document.getElementById('nextScroll');
+            
+            if (scrollNum > 1) {
+                prevBtn.href = `scroll.html?scroll=${scrollNum - 1}`;
+                prevBtn.classList.remove('disabled');
+            } else {
+                prevBtn.classList.add('disabled');
+            }
+            
+            if (scrollNum < 10) {
+                nextBtn.href = `scroll.html?scroll=${scrollNum + 1}`;
+                nextBtn.classList.remove('disabled');
+            } else {
+                nextBtn.classList.add('disabled');
+            }
+        }
+
+        // Load the scroll
+        loadScroll();
+    </script>
+</body>
+</html>

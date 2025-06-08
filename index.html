@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The GitScrolls - An Epic of Software Wisdom</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --parchment: #f4f1e8;
+            --dark-parchment: #e8e2d0;
+            --bronze: #cd7f32;
+            --dark-bronze: #b8651c;
+            --ancient-gold: #d4af37;
+            --charcoal: #2c2c2c;
+            --scroll-shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(45deg, var(--parchment) 0%, var(--dark-parchment) 100%);
+            background-attachment: fixed;
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(244, 241, 232, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--bronze);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--bronze);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--dark-bronze);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-family: 'Cinzel', serif;
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--bronze);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--bronze);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('public/images/scroll-04-12.png') center/cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        /* Fallback hero background for when image isn't loaded */
+        .hero.no-image {
+            background: 
+                linear-gradient(135deg, var(--charcoal) 0%, var(--dark-bronze) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><circle cx="200" cy="400" r="150" fill="%23cd7f32" opacity="0.1"/><path d="M400,200 Q600,100 800,200 Q1000,300 800,400 Q600,500 400,400 Q200,300 400,200" fill="%23d4af37" opacity="0.05"/></svg>') center/cover;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 1000px;
+            padding: 0 2rem;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            color: var(--bronze);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px var(--scroll-shadow);
+            letter-spacing: 3px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: white;
+            margin-bottom: 2rem;
+            font-style: italic;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-quote {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: var(--dark-bronze);
+            margin-bottom: 3rem;
+            font-weight: 600;
+            border-left: 4px solid var(--bronze);
+            padding-left: 2rem;
+            text-align: left;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--bronze);
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .btn-primary {
+            background: var(--bronze);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-bronze);
+            border-color: var(--dark-bronze);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(205, 127, 50, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--bronze);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bronze);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(205, 127, 50, 0.3);
+        }
+
+        /* Scrolls Preview Section */
+        .scrolls-preview {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            color: var(--bronze);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--ancient-gold);
+        }
+
+        .scrolls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .scroll-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-parchment);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-card:hover::before {
+            opacity: 0.12;
+        }
+
+        .scroll-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Individual scroll card backgrounds */
+        .scroll-card.scroll-1::before { background-image: url('assets/images/stormy-seas.jpg'); }
+        .scroll-card.scroll-2::before { background-image: url('assets/images/ancient-tablets.jpg'); }
+        .scroll-card.scroll-3::before { background-image: url('assets/images/testing-temple.jpg'); }
+        .scroll-card.scroll-4::before { background-image: url('assets/images/forking-paths.jpg'); }
+        .scroll-card.scroll-5::before { background-image: url('assets/images/digital-underworld.jpg'); }
+        .scroll-card.scroll-6::before { background-image: url('assets/images/chaos-sirens.jpg'); }
+        .scroll-card.scroll-7::before { background-image: url('assets/images/strait-monsters.jpg'); }
+        .scroll-card.scroll-8::before { background-image: url('assets/images/ancient-reviewer.jpg'); }
+        .scroll-card.scroll-9::before { background-image: url('assets/images/sacred-grove.jpg'); }
+        .scroll-card.scroll-10::before { background-image: url('assets/images/temple-ruins.jpg'); }
+
+        /* Community Cards */
+        .community-card {
+            background: linear-gradient(135deg, var(--charcoal) 0%, var(--dark-bronze) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .community-card::before {
+            opacity: 0.15 !important;
+        }
+
+        .community-card:hover::before {
+            opacity: 0.25 !important;
+        }
+
+        .community-card .scroll-number {
+            color: var(--ancient-gold);
+        }
+
+        .community-card .scroll-title {
+            color: white;
+        }
+
+        .community-card .scroll-excerpt {
+            color: #ccc;
+        }
+
+        .community-card .scroll-link {
+            color: var(--ancient-gold);
+            border-bottom-color: var(--ancient-gold);
+        }
+
+        .community-card .scroll-link:hover {
+            border-bottom-color: var(--ancient-gold);
+        }
+
+        .github-discussions::before { background-image: url('assets/images/community-discussions.jpg'); }
+        .github-repository::before { background-image: url('public/images/mosaic-git-log.png'); }
+
+        .scroll-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .scroll-number {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--bronze);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .scroll-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .scroll-excerpt {
+            color: var(--charcoal);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .scroll-link {
+            color: var(--bronze);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .scroll-link:hover {
+            border-bottom-color: var(--bronze);
+        }
+
+        /* GitHub Section */
+        .github-section {
+            background: var(--charcoal);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .github-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .github-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--ancient-gold);
+        }
+
+        .github-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .github-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--ancient-gold);
+            color: var(--charcoal);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .github-btn:hover {
+            background: #f0d050;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-parchment);
+            padding: 2rem;
+            text-align: center;
+            border-top: 3px solid var(--bronze);
+        }
+
+        .footer-text {
+            color: var(--charcoal);
+            font-style: italic;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                height: 80vh;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .github-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(205, 127, 50, 0.2);
+            z-index: 999;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: var(--bronze);
+            transition: width 0.1s ease;
+            width: 0%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">THE GITSCROLLS</a>
+            <ul class="nav-links">
+                <li><a href="#scrolls">The Scrolls</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="https://github.com/gitscrolls/gitscrolls">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">THE GITSCROLLS</h1>
+            <p class="hero-subtitle">An Epic of Software Wisdom</p>
+            <blockquote class="hero-quote">
+                "What you read changes nothing. What you do changes everything."
+            </blockquote>
+            <div class="cta-buttons">
+                <a href="scroll.html?scroll=1" class="btn btn-primary">Begin the Journey</a>
+                <a href="https://github.com/gitscrolls/gitscrolls" class="btn btn-secondary">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scrolls Preview -->
+    <section class="scrolls-preview" id="scrolls">
+        <h2 class="section-title">The Ten Sacred Scrolls</h2>
+        <div class="scrolls-grid">
+            <div class="scroll-card scroll-1">
+                <div class="scroll-number">SCROLL I</div>
+                <h3 class="scroll-title">The Unbroken Line</h3>
+                <p class="scroll-excerpt">"Do not trade your history for the illusion of mastery." Tuxicles learns from Linus the Elder that the timeline is sacred, even when ugly.</p>
+                <a href="scroll.html?scroll=1" class="scroll-link">Read the Scroll →</a>
+            </div>
+            
+            <div class="scroll-card scroll-2">
+                <div class="scroll-number">SCROLL II</div>
+                <h3 class="scroll-title">Chronicle of Forgotten Messages</h3>
+                <p class="scroll-excerpt">"The log is not your diary. It is your debt to those who must undo your mistakes." The Teacher of Lost Packets shares the art of meaningful communication.</p>
+                <a href="scroll.html?scroll=2" class="scroll-link">Read the Scroll →</a>
+            </div>
+            
+            <div class="scroll-card scroll-3">
+                <div class="scroll-number">SCROLL III</div>
+                <h3 class="scroll-title">Oracle's Testament of Devotion</h3>
+                <p class="scroll-excerpt">"Tests are proof of love." The Prophet of Red-Green reveals that testing is the highest form of professional care.</p>
+                <a href="scroll.html?scroll=3" class="scroll-link">Read the Scroll →</a>
+            </div>
+            
+            <div class="scroll-card scroll-4">
+                <div class="scroll-number">SCROLL IV</div>
+                <h3 class="scroll-title">The Schism Scrolls</h3>
+                <p class="scroll-excerpt">"Forks are not betrayals." The Fork-Bearer of Freedom teaches that division can strengthen rather than weaken the whole.</p>
+                <a href="scroll.html?scroll=4" class="scroll-link">Read the Scroll →</a>
+            </div>
+            
+            <div class="scroll-card scroll-5">
+                <div class="scroll-number">SCROLL V</div>
+                <h3 class="scroll-title">The Wounding of Hubris</h3>
+                <p class="scroll-excerpt">"They needed reliability. You gave them elegance. They got neither." Tuxrates becomes Tuxilles through catastrophic consequence.</p>
+                <a href="scroll.html?scroll=5" class="scroll-link">Read the Scroll →</a>
+            </div>
+            
+            <div class="scroll-card scroll-6">
+                <div class="scroll-number">SCROLL VI</div>
+                <h3 class="scroll-title">Songs of the Chaos Sirens</h3>
+                <p class="scroll-excerpt">"Every bug is a feature request." The Trickster teaches that chaos and creativity are partners, not enemies.</p>
+                <a href="scroll.html?scroll=6" class="scroll-link">Read the Scroll →</a>
+            </div>
+            
+            <div class="scroll-card scroll-7">
+                <div class="scroll-number">SCROLL VII</div>
+                <h3 class="scroll-title">Between the Monsters of Time</h3>
+                <p class="scroll-excerpt">"Sacred timing isn't about finding the perfect moment—it's about making the chosen moment as safe as possible."</p>
+                <a href="scroll.html?scroll=7" class="scroll-link">Read the Scroll →</a>
+            </div>
+            
+            <div class="scroll-card scroll-8">
+                <div class="scroll-number">SCROLL VIII</div>
+                <h3 class="scroll-title">Before the Ancient Reviewer</h3>
+                <p class="scroll-excerpt">"All code is temporary, all blame is eternal." The Ancient Reviewer teaches that legacy is measured by service, not cleverness.</p>
+                <a href="scroll.html?scroll=8" class="scroll-link">Read the Scroll →</a>
+            </div>
+            
+            <div class="scroll-card scroll-9">
+                <div class="scroll-number">SCROLL IX</div>
+                <h3 class="scroll-title">Commandments of the Wise</h3>
+                <p class="scroll-excerpt">"The mentor you needed when you began." Tuxilles learns that wisdom hoarded rots, but wisdom given plants forests.</p>
+                <a href="scroll.html?scroll=9" class="scroll-link">Read the Scroll →</a>
+            </div>
+            
+            <div class="scroll-card scroll-10">
+                <div class="scroll-number">SCROLL X</div>
+                <h3 class="scroll-title">Where Heroes Go to Die</h3>
+                <p class="scroll-excerpt">"The circle is not complete. It's broken. And you're the crack where the light gets in." The eternal cycle begins anew.</p>
+                <a href="scroll.html?scroll=10" class="scroll-link">Read the Scroll →</a>
+            </div>
+
+            <!-- Community Cards -->
+            <div class="scroll-card community-card github-discussions">
+                <div class="scroll-number">💬 COMMUNITY</div>
+                <h3 class="scroll-title">Join the Discussion</h3>
+                <p class="scroll-excerpt">Share your battle scars, ask questions, and help others learn from your journey. The Sacred Grove grows through shared wisdom.</p>
+                <a href="https://github.com/gitscrolls/gitscrolls/discussions" class="scroll-link">Join Discussions →</a>
+            </div>
+            
+            <div class="scroll-card community-card github-repository">
+                <div class="scroll-number">📜 SOURCE</div>
+                <h3 class="scroll-title">The Sacred Repository</h3>
+                <p class="scroll-excerpt">Fork the scrolls, contribute improvements, or adapt them for your own community. Help the wisdom multiply and evolve.</p>
+                <a href="https://github.com/gitscrolls/gitscrolls" class="scroll-link">View Repository →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Community Section -->
+    <section class="github-section" id="community">
+        <div class="github-content">
+            <h2 class="github-title">Join the Sacred Grove</h2>
+            <p class="github-text">
+                The GitScrolls live and grow through community wisdom. Fork the repository, 
+                share your own battle scars, and help build the eternal cycle of teaching 
+                that transforms individual knowledge into collective understanding.
+            </p>
+            <div class="github-links">
+                <a href="https://github.com/gitscrolls/gitscrolls" class="github-btn">
+                    📜 Read the Scrolls
+                </a>
+                <a href="https://github.com/gitscrolls/" class="github-btn">
+                    🏛️ Join the Organization
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">
+            "Stop reading. Start helping. The circle is not complete. Your turn is here."
+        </p>
+    </footer>
+
+    <script>
+        // Scroll progress indicator
+        window.addEventListener('scroll', function() {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation to cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe scroll cards
+        document.querySelectorAll('.scroll-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
