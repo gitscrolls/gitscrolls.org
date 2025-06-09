@@ -4,7 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The GitScrolls - An Epic of Software Wisdom</title>
+    <link rel="icon" type="image/png" href="public/images/gitscrolls-01-01.png">
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://github.com">
+    
+    <!-- Font loading with display swap -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Umami Analytics - Replace data-website-id with your actual ID -->
+    <!-- <script async defer data-website-id="YOUR-WEBSITE-ID" src="https://your-umami-instance.com/umami.js"></script> -->
     <style>
         * {
             margin: 0;
@@ -20,15 +32,38 @@
             --ancient-gold: #d4af37;
             --charcoal: #2c2c2c;
             --scroll-shadow: rgba(0, 0, 0, 0.3);
+            --text-primary: #2c2c2c;
+            --text-secondary: #4a4a4a;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f4f1e8;
+            --bg-header: rgba(244, 241, 232, 0.95);
+            --border-color: #e8e2d0;
+        }
+
+        [data-theme="dark"] {
+            --parchment: #1a1a1a;
+            --dark-parchment: #0d0d0d;
+            --bronze: #d4af37;
+            --dark-bronze: #cd7f32;
+            --ancient-gold: #ffd700;
+            --charcoal: #e8e2d0;
+            --scroll-shadow: rgba(255, 255, 255, 0.1);
+            --text-primary: #e8e2d0;
+            --text-secondary: #b8b8b8;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --bg-header: rgba(26, 26, 26, 0.95);
+            --border-color: #2c2c2c;
         }
 
         body {
             font-family: 'Crimson Text', serif;
             background: linear-gradient(45deg, var(--parchment) 0%, var(--dark-parchment) 100%);
             background-attachment: fixed;
-            color: var(--charcoal);
+            color: var(--text-primary);
             line-height: 1.7;
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* Header Navigation */
@@ -36,7 +71,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(244, 241, 232, 0.95);
+            background: var(--bg-header);
             backdrop-filter: blur(10px);
             border-bottom: 3px solid var(--bronze);
             z-index: 1000;
@@ -47,9 +82,12 @@
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 0 2rem;
+        }
+
+        .nav-container .logo {
+            margin-right: auto;
         }
 
         .logo {
@@ -74,7 +112,7 @@
         .nav-links a {
             font-family: 'Cinzel', serif;
             text-decoration: none;
-            color: var(--charcoal);
+            color: var(--text-primary);
             font-weight: 600;
             transition: color 0.3s ease;
             position: relative;
@@ -97,6 +135,50 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: transparent;
+            border: 2px solid var(--bronze);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--bronze);
+            margin-left: 2rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bronze);
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .theme-icon-light {
+            display: block;
+        }
+
+        .theme-icon-dark {
+            display: none;
+        }
+
+        [data-theme="dark"] .theme-icon-light {
+            display: none;
+        }
+
+        [data-theme="dark"] .theme-icon-dark {
+            display: block;
         }
 
         /* Hero Section */
@@ -239,12 +321,12 @@
         }
 
         .scroll-card {
-            background: white;
+            background: var(--bg-primary);
             border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 30px var(--scroll-shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid var(--dark-parchment);
+            border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
         }
@@ -286,10 +368,14 @@
 
         /* Community Cards */
         .community-card {
-            background: linear-gradient(135deg, var(--charcoal) 0%, var(--dark-bronze) 100%);
+            background: linear-gradient(135deg, var(--bronze) 0%, var(--dark-bronze) 100%);
             color: white;
             position: relative;
             overflow: hidden;
+        }
+
+        [data-theme="dark"] .community-card {
+            background: linear-gradient(135deg, var(--dark-bronze) 0%, var(--bronze) 100%);
         }
 
         .community-card::before {
@@ -326,7 +412,7 @@
 
         .scroll-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 40px var(--scroll-shadow);
         }
 
         .scroll-number {
@@ -340,13 +426,13 @@
         .scroll-title {
             font-family: 'Cinzel', serif;
             font-size: 1.5rem;
-            color: var(--charcoal);
+            color: var(--text-primary);
             margin-bottom: 1rem;
             font-weight: 600;
         }
 
         .scroll-excerpt {
-            color: var(--charcoal);
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
             font-style: italic;
         }
@@ -365,10 +451,12 @@
 
         /* GitHub Section */
         .github-section {
-            background: var(--charcoal);
-            color: white;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
             padding: 4rem 2rem;
             text-align: center;
+            border-top: 3px solid var(--bronze);
+            border-bottom: 3px solid var(--bronze);
         }
 
         .github-content {
@@ -401,30 +489,33 @@
             align-items: center;
             gap: 0.5rem;
             padding: 1rem 2rem;
-            background: var(--ancient-gold);
-            color: var(--charcoal);
+            background: var(--bronze);
+            color: white;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
+            border: 2px solid var(--bronze);
         }
 
         .github-btn:hover {
-            background: #f0d050;
+            background: var(--dark-bronze);
+            border-color: var(--dark-bronze);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 20px var(--scroll-shadow);
         }
 
         /* Footer */
         .footer {
-            background: var(--dark-parchment);
+            background: var(--bg-secondary);
             padding: 2rem;
             text-align: center;
             border-top: 3px solid var(--bronze);
+            color: var(--text-primary);
         }
 
         .footer-text {
-            color: var(--charcoal);
+            color: var(--text-primary);
             font-style: italic;
         }
 
@@ -444,6 +535,10 @@
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+            }
+            
+            .theme-toggle {
+                margin-left: auto;
             }
             
             .hero {
@@ -478,6 +573,26 @@
             transition: width 0.1s ease;
             width: 0%;
         }
+
+        /* Footer (additional styles) */
+        .footer {
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+        }
+
+        .footer a {
+            color: var(--bronze);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--dark-bronze);
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -495,6 +610,14 @@
                 <li><a href="#community">Community</a></li>
                 <li><a href="https://github.com/gitscrolls/gitscrolls">GitHub</a></li>
             </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <svg class="theme-icon-light" viewBox="0 0 24 24">
+                    <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                </svg>
+                <svg class="theme-icon-dark" viewBox="0 0 24 24">
+                    <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.88-.1-1.36-.1z"/>
+                </svg>
+            </button>
         </nav>
     </header>
 
@@ -638,6 +761,62 @@
             document.getElementById('scrollProgress').style.width = scrolled + '%';
         });
 
+        // Theme Management
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Get stored theme or system preference
+        function getTheme() {
+            const stored = localStorage.getItem('theme');
+            if (stored) return stored;
+            
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                return 'dark';
+            }
+            return 'light';
+        }
+        
+        // Apply theme
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            // Update meta theme color
+            const metaTheme = document.querySelector('meta[name="theme-color"]');
+            if (metaTheme) {
+                metaTheme.content = theme === 'dark' ? '#1a1a1a' : '#f4f1e8';
+            } else {
+                const meta = document.createElement('meta');
+                meta.name = 'theme-color';
+                meta.content = theme === 'dark' ? '#1a1a1a' : '#f4f1e8';
+                document.head.appendChild(meta);
+            }
+        }
+        
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            applyTheme(newTheme);
+            
+            // Track theme change
+            trackEvent('theme_change', {
+                from: currentTheme,
+                to: newTheme
+            });
+        });
+        
+        // Apply initial theme
+        applyTheme(getTheme());
+        
+        // Listen for system theme changes
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        }
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -674,6 +853,63 @@
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(card);
         });
+
+        // Analytics tracking
+        function trackEvent(eventName, eventData = {}) {
+            // Umami tracking
+            if (typeof umami !== 'undefined') {
+                umami.track(eventName, eventData);
+            }
+            
+            // Console logging for development
+            console.log('Analytics Event:', eventName, eventData);
+        }
+
+        // Track scroll card clicks
+        document.addEventListener('click', (e) => {
+            const scrollCard = e.target.closest('.scroll-card');
+            if (scrollCard) {
+                const scrollNumber = scrollCard.querySelector('.scroll-number').textContent;
+                const scrollTitle = scrollCard.querySelector('h3').textContent;
+                trackEvent('homepage_scroll_click', {
+                    scroll_number: scrollNumber,
+                    scroll_title: scrollTitle
+                });
+            }
+        });
+
+        // Track CTA button clicks
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('cta-primary')) {
+                trackEvent('cta_click', { button: 'begin_journey' });
+            } else if (e.target.classList.contains('cta-secondary')) {
+                trackEvent('cta_click', { button: 'view_source' });
+            }
+        });
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
     </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>"Stop reading. Start helping. The circle is not complete. Your turn is here."</p>
+        <p>
+            <strong>Copyleft © 2025 J. Kirby Ross, Scrollkeeper</strong><br>
+            Shared freely under the Sacred Commit Covenant (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>)<br>
+            <a href="https://github.com/gitscrolls/gitscrolls/blob/main/LICENSE">LICENSE</a> 🔗 · 
+            <a href="https://github.com/gitscrolls/gitscrolls/blob/main/LICENSE_USAGE.md">Usage Rites</a> 📜
+        </p>
+    </footer>
 </body>
 </html>
