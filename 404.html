@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Not Found - The GitScrolls</title>
+    <link rel="icon" type="image/png" href="/public/images/gitscrolls-01-01.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --parchment: #f4f1e8;
+            --dark-parchment: #e8e2d0;
+            --bronze: #cd7f32;
+            --dark-bronze: #b8651c;
+            --ancient-gold: #d4af37;
+            --charcoal: #2c2c2c;
+            --text-primary: #2c2c2c;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f4f1e8;
+        }
+
+        [data-theme="dark"] {
+            --parchment: #1a1a1a;
+            --dark-parchment: #0d0d0d;
+            --bronze: #d4af37;
+            --dark-bronze: #cd7f32;
+            --ancient-gold: #ffd700;
+            --charcoal: #e8e2d0;
+            --text-primary: #e8e2d0;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(45deg, var(--parchment) 0%, var(--dark-parchment) 100%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            background: var(--bg-primary);
+            padding: 4rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border: 3px solid var(--bronze);
+        }
+
+        .error-code {
+            font-family: 'Cinzel', serif;
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--bronze);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--dark-bronze);
+            margin-bottom: 1.5rem;
+        }
+
+        .error-message {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .poem {
+            font-style: italic;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-left: 4px solid var(--bronze);
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            white-space: pre-line;
+            font-size: 1.1rem;
+        }
+
+        .navigation {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--bronze);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--bronze);
+        }
+
+        .nav-button:hover {
+            background: white;
+            color: var(--bronze);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-button.secondary {
+            background: transparent;
+            color: var(--bronze);
+        }
+
+        .nav-button.secondary:hover {
+            background: var(--bronze);
+            color: white;
+        }
+
+        .ornament {
+            font-size: 2rem;
+            color: var(--bronze);
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 5rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .error-container {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1>The Scroll Has Vanished</h1>
+        
+        <p class="error-message">
+            Alas, weary traveler, the scroll you seek has been lost to the mists of time.
+        </p>
+        
+        <div class="poem">
+In libraries vast and repos deep,
+Where ancient commits forever sleep,
+You searched for wisdom, truth to find,
+But left this sacred scroll behind.
+
+The path you took has led astray,
+The URL has lost its way,
+But fear not, seeker, all's not lost—
+Return to scrolls, whatever the cost.
+        </div>
+        
+        <div class="ornament">❦</div>
+        
+        <p class="error-message">
+            Perhaps the ancient keepers moved it, or perhaps it never was...
+        </p>
+        
+        <nav class="navigation">
+            <a href="/" class="nav-button">Return Home</a>
+            <a href="/scroll.html?scroll=1" class="nav-button secondary">Read Scroll I</a>
+        </nav>
+    </div>
+
+    <script>
+        // Apply saved theme
+        const savedTheme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+</html>

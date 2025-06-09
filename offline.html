@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - The GitScrolls</title>
+    <link rel="icon" type="image/png" href="/public/images/gitscrolls-01-01.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --parchment: #f4f1e8;
+            --dark-parchment: #e8e2d0;
+            --bronze: #cd7f32;
+            --dark-bronze: #b8651c;
+            --ancient-gold: #d4af37;
+            --charcoal: #2c2c2c;
+            --text-primary: #2c2c2c;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f4f1e8;
+        }
+
+        [data-theme="dark"] {
+            --parchment: #1a1a1a;
+            --dark-parchment: #0d0d0d;
+            --bronze: #d4af37;
+            --dark-bronze: #cd7f32;
+            --ancient-gold: #ffd700;
+            --charcoal: #e8e2d0;
+            --text-primary: #e8e2d0;
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(45deg, var(--parchment) 0%, var(--dark-parchment) 100%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .offline-container {
+            text-align: center;
+            max-width: 600px;
+            background: var(--bg-primary);
+            padding: 4rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border: 3px solid var(--bronze);
+        }
+
+        .offline-icon {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            filter: grayscale(100%);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--dark-bronze);
+            margin-bottom: 1.5rem;
+        }
+
+        .offline-message {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .poem {
+            font-style: italic;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-left: 4px solid var(--bronze);
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            white-space: pre-line;
+            font-size: 1.1rem;
+        }
+
+        .status {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            color: var(--bronze);
+        }
+
+        .cached-scrolls {
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .cached-scrolls h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--bronze);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .scroll-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .scroll-link {
+            display: block;
+            padding: 0.8rem 1rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--bronze);
+        }
+
+        .scroll-link:hover {
+            background: var(--bronze);
+            color: white;
+            padding-left: 1.5rem;
+        }
+
+        .retry-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--bronze);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--bronze);
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        .retry-button:hover {
+            background: white;
+            color: var(--bronze);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .ornament {
+            font-size: 2rem;
+            color: var(--bronze);
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .offline-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .offline-icon {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📡</div>
+        <h1>The Connection is Lost</h1>
+        
+        <p class="offline-message">
+            The ethereal link to the repository has been severed.
+        </p>
+        
+        <div class="poem">
+Beyond the reach of WiFi's glow,
+Where data streams no longer flow,
+You stand alone, yet not bereft—
+For cached scrolls in your browser are left.
+
+The network sleeps, the servers rest,
+But wisdom stored will serve you best,
+Until the connection wakes once more,
+And opens wide the knowledge door.
+        </div>
+        
+        <div class="status" id="connectionStatus">
+            Checking connection...
+        </div>
+        
+        <div class="cached-scrolls" id="cachedScrolls">
+            <h2>Cached Scrolls Available</h2>
+            <ul class="scroll-list" id="scrollList">
+                <!-- Populated by JavaScript -->
+            </ul>
+        </div>
+        
+        <button class="retry-button" onclick="checkConnection()">
+            Retry Connection
+        </button>
+        
+        <div class="ornament">◈</div>
+    </div>
+
+    <script>
+        // Apply saved theme
+        const savedTheme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        // Connection status
+        function updateConnectionStatus() {
+            const statusEl = document.getElementById('connectionStatus');
+            if (navigator.onLine) {
+                statusEl.textContent = '✓ Connection restored! Refreshing...';
+                statusEl.style.color = 'green';
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+            } else {
+                statusEl.textContent = '✕ Still offline';
+                statusEl.style.color = 'var(--bronze)';
+            }
+        }
+
+        function checkConnection() {
+            updateConnectionStatus();
+        }
+
+        // Check cached scrolls
+        async function checkCachedScrolls() {
+            const scrollList = document.getElementById('scrollList');
+            const scrolls = [
+                { number: 1, title: 'The Unbroken Line' },
+                { number: 2, title: 'Chronicle of Forgotten Messages' },
+                { number: 3, title: 'Oracle\'s Testament of Devotion' },
+                { number: 4, title: 'The Schism Scrolls' },
+                { number: 5, title: 'The Wounding of Hubris' },
+                { number: 6, title: 'Songs of the Chaos Sirens' },
+                { number: 7, title: 'Between the Monsters of Time' },
+                { number: 8, title: 'Before the Ancient Reviewer' },
+                { number: 9, title: 'Commandments of the Wise' },
+                { number: 10, title: 'Where Heroes Go to Die' }
+            ];
+
+            scrollList.innerHTML = '';
+            
+            // Check if we have service worker support
+            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                // For now, just show all scrolls as potentially cached
+                scrolls.forEach(scroll => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = `/scroll.html?scroll=${scroll.number}`;
+                    a.className = 'scroll-link';
+                    a.textContent = `Scroll ${scroll.number}: ${scroll.title}`;
+                    li.appendChild(a);
+                    scrollList.appendChild(li);
+                });
+            } else {
+                scrollList.innerHTML = '<li style="padding: 1rem; color: var(--text-primary);">No scrolls cached yet. Visit scrolls while online to cache them.</li>';
+            }
+        }
+
+        // Listen for online/offline events
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+
+        // Initial checks
+        updateConnectionStatus();
+        checkCachedScrolls();
+    </script>
+</body>
+</html>
