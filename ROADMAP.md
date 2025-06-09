@@ -56,75 +56,86 @@ Based on dependencies and user impact:
 - [x] Remove navigation footer
 - [x] Extract quote section
 - [x] Extract poem section
+- [x] Extract subtitle section
+- [x] Handle actual GitScrolls markdown structure
 - [x] Clean up redundant headers
 - [x] Test with all 10 scrolls
 - [x] Handle edge cases
 
 ### 2. Scroll Hero Section
 **Priority: 2 - Visual Impact**
-- [ ] Create `scrolls-metadata.json` with scroll information (titles, quotes, poems, hero images)
-- [ ] Design and implement hero section layout
-- [ ] Add background image support for each scroll
-- [ ] Extract and display quote prominently
-- [ ] Create poem section below hero
-- [ ] Add scroll-down indicator animation
-- [ ] Test responsive design for hero sections
+- [x] ~~Create `scrolls-metadata.json` with scroll information~~ (Removed - using dynamic parsing instead)
+- [x] Extract and display quote prominently (via MarkdownProcessor)
+- [x] Design and implement hero section layout
+- [x] Add background image support for each scroll
+- [x] Create poem section below hero
+- [x] Add scroll-down indicator animation
+- [x] Test responsive design for hero sections
 
 ### 3. Footer with Copyright & License
 **Priority: 3 - Quick Win**
-- [ ] Design footer layout with three sections
-- [ ] Add copyright information with dynamic year
-- [ ] Include license details and links
-- [ ] Add GitHub repository links
-- [ ] Implement "Fork this" call-to-action
-- [ ] Apply footer to both index.html and scroll.html
-- [ ] Style footer with site theme
+- [x] Design footer layout with three sections
+- [x] Add copyright information with dynamic year
+- [x] Include license details and links
+- [x] Add GitHub repository links
+- [x] Implement "Fork this" call-to-action
+- [x] Apply footer to both index.html and scroll.html
+- [x] Style footer with site theme
 
 ### 4. Dynamic Scroll Navigation Dropdown
 **Priority: 4 - Enhanced UX**
-- [ ] Create dropdown component for scroll pages
-- [ ] Implement GitHub API integration to fetch scroll list
-- [ ] Add caching mechanism (localStorage, 1-hour expiry)
-- [ ] Build dropdown menu dynamically
-- [ ] Highlight current scroll in dropdown
-- [ ] Add keyboard navigation support
-- [ ] Handle loading and error states
-- [ ] Test on mobile devices
+- [x] Create dropdown component for scroll pages
+- [x] Implement GitHub API integration to fetch scroll list
+- [x] Add caching mechanism (localStorage, 1-hour expiry)
+- [x] Build dropdown menu dynamically
+- [x] Highlight current scroll in dropdown
+- [x] Add keyboard navigation support
+- [x] Handle loading and error states
+- [x] Test on mobile devices
 
 ### 5. Breadcrumb Navigation with TOC
 **Priority: 5 - Advanced Feature**
-- [ ] Design breadcrumb navigation bar
-- [ ] Implement sticky positioning
-- [ ] Generate table of contents from headings
-- [ ] Create TOC dropdown component
-- [ ] Add scroll position tracking
-- [ ] Update current section indicator
-- [ ] Implement smooth scroll to sections
-- [ ] Add reading progress bar
-- [ ] Make mobile responsive
+- [x] Design breadcrumb navigation bar
+- [x] Implement sticky positioning
+- [x] Generate table of contents from headings
+- [x] Create TOC dropdown component
+- [x] Add scroll position tracking
+- [x] Update current section indicator
+- [x] Implement smooth scroll to sections
+- [x] Add reading progress bar
+- [x] Make mobile responsive
 
 ## Phase 2: Enhancements
 
 ### Content Improvements
-- [ ] Add images between scroll sections
-- [ ] Implement lazy loading for images
-- [ ] Add social sharing buttons
-- [ ] Create print-friendly styles
+- [x] Add images between scroll sections
+- [x] Implement lazy loading for images
+- [x] Add social sharing buttons
+- [x] Create print-friendly styles
+- [x] **Infinite Scroll Mode** - Seamless reading experience through all scrolls
 
 ### Performance
-- [ ] Optimize image loading
-- [ ] Implement service worker for offline access
-- [ ] Add progressive enhancement
+- [x] Optimize image loading
+- [x] Implement service worker for offline access
+- [x] Add progressive enhancement
 - [ ] Minimize JavaScript bundle size
 
 ### SEO & Accessibility
-- [ ] Add meta descriptions for each scroll
-- [ ] Implement Open Graph tags
-- [ ] Ensure ARIA labels on interactive elements
-- [ ] Test with screen readers
-- [ ] Add skip navigation links
+- [x] Add meta descriptions for each scroll
+- [x] Implement Open Graph tags
+- [x] Ensure ARIA labels on interactive elements
+- [x] Test with screen readers
+- [x] Add skip navigation links
 
 ## Phase 3: Future Features
+
+### Dark Mode
+- [x] Implement CSS variables for theming
+- [x] Create dark color scheme
+- [x] Add theme toggle button to navigation
+- [x] Store user preference in localStorage
+- [x] Respect system dark mode preference
+- [x] Update all pages to support dark mode
 
 ### Community Features
 - [ ] Add comments section (GitHub Discussions integration)
@@ -132,16 +143,16 @@ Based on dependencies and user impact:
 - [ ] Add "remix this scroll" functionality
 
 ### Analytics & Monitoring
-- [ ] Add privacy-friendly analytics
-- [ ] Track scroll completion rates
-- [ ] Monitor performance metrics
+- [x] Add privacy-friendly analytics (Umami)
+- [x] Track scroll completion rates
+- [x] Monitor performance metrics
 
 ## Technical Debt
-- [ ] Refactor shared code into modules
-- [ ] Add build process for optimization
-- [ ] Create component library
-- [ ] Add automated testing
-- [ ] Set up continuous deployment
+- [x] Refactor shared code into modules
+- [x] Add build process for optimization (Vite)
+- [x] Create component library
+- [x] Add automated testing (Jest)
+- [x] Set up continuous deployment (GitHub Actions)
 
 ## Feature Documentation
 
@@ -171,6 +182,11 @@ Detailed planning documents for each feature are available in `/docs/features/`:
    - Secondary navigation with current location
    - Dynamic table of contents
    - Reading progress indicator
+
+6. **[Infinite Scroll Mode](./docs/features/infinite-scroll.md)**
+   - Continuous reading experience
+   - Dynamic loading and unloading
+   - Smart memory management
 
 ## Notes
 - Test all features across Chrome, Firefox, Safari, and Edge
