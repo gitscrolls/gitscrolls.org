@@ -1,0 +1,22 @@
+services:
+  gitscrolls:
+    build: .
+    container_name: gitscrolls-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      # Mount source code for hot reload
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./index.html:/app/index.html
+      - ./scroll.html:/app/scroll.html
+      - ./404.html:/app/404.html
+      - ./offline.html:/app/offline.html
+      - ./service-worker.js:/app/service-worker.js
+      - ./vite.config.js:/app/vite.config.js
+      # Prevent node_modules from being overwritten
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
