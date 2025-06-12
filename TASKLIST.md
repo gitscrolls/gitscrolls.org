@@ -4,9 +4,9 @@
 
 ### Navigation & Core Functionality
 - [x] **Fix mobile navigation** - Nav links disappear on mobile (<768px) with no hamburger menu replacement
-- [ ] **Fix image path inconsistencies** - Update `public/images/` references in scroll-data.js to `images/`
-- [ ] **Remove duplicate footer** - Two footer elements in index.html (lines 750 & 905)
-- [ ] **Add loading states** - No loading indicators when fetching markdown content
+- [x] **Fix image path inconsistencies** - Update `public/images/` references in scroll-data.js to `images/`
+- [x] **Remove duplicate footer** - Two footer elements in index.html (lines 750 & 905)
+- [x] **Add loading states** - No loading indicators when fetching markdown content
 - [ ] **Add error states** - No error handling for failed API calls or missing content
 
 ### Missing Assets
