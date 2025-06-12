@@ -30,36 +30,37 @@
 ## 🟢 Medium Priority Enhancements
 
 ### Content Discovery
-- [ ] **Add progress tracking** - Track which scrolls have been read
-- [ ] **Add reading time estimates** - Show estimated reading time for each scroll
-- [ ] **Implement search functionality** - Allow searching within scrolls
-- [ ] **Add bookmark/favorites** - Let users save scrolls for later
+- [x] **Add progress tracking** - Track which scrolls have been read
+- [x] **Add reading time estimates** - Show estimated reading time for each scroll
+- [x] **Implement search functionality** - Allow searching within scrolls
+- [x] **Add bookmark/favorites** - Let users save scrolls for later
 
 ### Accessibility
-- [ ] **Add theme change announcements** - Screen readers should announce theme switches
-- [ ] **Improve dark mode contrast** - Some text elements have insufficient contrast
-- [ ] **Add focus trap for modals** - Dropdown/modal components need proper focus management
-- [ ] **Add skip to scroll navigation** - Quick jump to scroll selection
+- [x] **Add theme change announcements** - Screen readers should announce theme switches
+- [x] **Improve dark mode contrast** - Some text elements have insufficient contrast
+- [x] **Add focus trap for modals** - Dropdown/modal components need proper focus management
+- [x] **Add skip to scroll navigation** - Quick jump to scroll selection
 
 ## 🔵 Low Priority Nice-to-Haves
 
 ### Visual Enhancements
-- [ ] **Add scroll animations** - Smooth reveal animations for content sections
-- [ ] **Implement print styles** - Optimize scrolls for printing
-- [ ] **Add reading mode** - Distraction-free reading experience
-- [ ] **Add font size controls** - Allow users to adjust text size
+- [ ] ~~Add scroll animations~~ - Smooth reveal animations for content sections (REJECTED)
+- [x] **Implement print styles** - Optimize scrolls for printing
+- [x] **Add reading mode** - Distraction-free reading experience
+- [x] **Add font size controls** - Allow users to adjust text size
 
 ### Advanced Features
-- [ ] **Add commenting system** - Allow discussion on individual scrolls
-- [ ] **Implement scroll recommendations** - Suggest next scroll based on reading history
-- [ ] **Add export functionality** - Export scrolls as PDF/EPUB
-- [ ] **Create mobile app wrapper** - PWA to app store deployment
+- [ ] ~~Add commenting system~~ - Allow discussion on individual scrolls (Link to GitHub Discussions instead)
+- [ ] ~~Implement scroll recommendations~~ - Suggest next scroll based on reading history (REJECTED - misunderstood as social sharing)
+- [x] **Add export functionality** - Export scrolls as PDF/EPUB
+- [ ] ~~Create mobile app wrapper~~ - PWA to app store deployment (REJECTED)
 
 ### Developer Experience
-- [ ] **Add component documentation** - Document component APIs and usage
-- [ ] **Create style guide** - Visual style guide for consistency
+- [ ] ~~Add component documentation~~ - Document component APIs and usage (NOT NEEDED)
+- [ ] ~~Create style guide~~ - Visual style guide for consistency (NOT NEEDED)
 - [ ] **Add E2E tests** - Automated testing for critical user flows
 - [ ] **Implement analytics events** - Track user interactions beyond basic page views
+- [x] **Add social share buttons** - WhatsApp and Reddit added to existing Twitter, LinkedIn, Facebook, Email
 
 ## 📝 Notes
 

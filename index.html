@@ -43,17 +43,17 @@
         [data-theme="dark"] {
             --parchment: #1a1a1a;
             --dark-parchment: #0d0d0d;
-            --bronze: #d4af37;
-            --dark-bronze: #cd7f32;
+            --bronze: #f4b643;  /* Increased brightness for better contrast */
+            --dark-bronze: #e5a42b;  /* Increased brightness */
             --ancient-gold: #ffd700;
-            --charcoal: #e8e2d0;
+            --charcoal: #f0f0f0;  /* Increased contrast from #e8e2d0 */
             --scroll-shadow: rgba(255, 255, 255, 0.1);
-            --text-primary: #e8e2d0;
-            --text-secondary: #b8b8b8;
+            --text-primary: #f0f0f0;  /* Increased contrast from #e8e2d0 */
+            --text-secondary: #d0d0d0;  /* Increased contrast from #b8b8b8 */
             --bg-primary: #0d0d0d;
             --bg-secondary: #1a1a1a;
             --bg-header: rgba(26, 26, 26, 0.95);
-            --border-color: #2c2c2c;
+            --border-color: #3a3a3a;  /* Lighter border for visibility */
         }
 
         body {
@@ -673,9 +673,32 @@
             color: var(--dark-bronze);
             text-decoration: underline;
         }
+
+        /* Skip Links */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            z-index: 9999;
+            padding: 1rem;
+            background: var(--bronze);
+            color: white;
+            text-decoration: none;
+            border-radius: 0 0 8px 0;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+        }
+
+        .skip-link:focus {
+            left: 0;
+            top: 0;
+        }
     </style>
 </head>
 <body>
+    <!-- Skip Links -->
+    <a href="#scrolls" class="skip-link">Skip to scrolls</a>
+    <a href="#community" class="skip-link">Skip to community</a>
+    
     <!-- Scroll Indicator -->
     <div class="scroll-indicator">
         <div class="scroll-progress" id="scrollProgress"></div>
@@ -876,6 +899,16 @@
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             applyTheme(newTheme);
             
+            // Announce theme change to screen readers
+            const announcement = document.getElementById('ariaAnnouncements');
+            if (announcement) {
+                announcement.textContent = `Theme changed to ${newTheme} mode`;
+                // Clear announcement after a delay
+                setTimeout(() => {
+                    announcement.textContent = '';
+                }, 1000);
+            }
+            
             // Track theme change
             trackEvent('theme_change', {
                 from: currentTheme,
@@ -1012,6 +1045,9 @@
             });
         }
     </script>
+
+    <!-- ARIA Live Region for Announcements -->
+    <div class="sr-only" role="status" aria-live="polite" id="ariaAnnouncements" style="position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden;"></div>
 
     <!-- Footer -->
     <footer class="footer">

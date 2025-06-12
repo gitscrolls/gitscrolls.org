@@ -92,6 +92,22 @@ export class Dropdown {
                 const prevIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
                 items[prevIndex]?.focus();
                 break;
+                
+            case 'Tab':
+                // Trap focus within dropdown
+                if (items.length > 0) {
+                    e.preventDefault();
+                    if (e.shiftKey) {
+                        // Shift+Tab: go to previous item
+                        const prevIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
+                        items[prevIndex]?.focus();
+                    } else {
+                        // Tab: go to next item
+                        const nextIndex = currentIndex + 1 < items.length ? currentIndex + 1 : 0;
+                        items[nextIndex]?.focus();
+                    }
+                }
+                break;
         }
     }
 
