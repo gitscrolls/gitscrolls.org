@@ -17,10 +17,10 @@ export const scrolls = [
 ];
 
 export const heroImages = {
-    3: 'public/images/scroll-03-hero.png',
-    4: 'public/images/scroll-04-hero.png',
-    13: 'public/images/scroll-13-hero.png',
-    15: 'public/images/scroll-15-hero.png'
+    3: 'images/scroll-03-hero.png',
+    4: 'images/scroll-04-hero.png',
+    13: 'images/scroll-13-hero.png',
+    15: 'images/scroll-15-hero.png'
 };
 
 export const scrollImages = {
@@ -47,7 +47,7 @@ export function getScroll(num) {
  * @returns {string} Image path
  */
 export function getHeroImage(num) {
-    return heroImages[num] || `public/images/scroll-${String(num).padStart(2, '0')}-01.png`;
+    return heroImages[num] || `images/scroll-${String(num).padStart(2, '0')}-01.png`;
 }
 
 /**
