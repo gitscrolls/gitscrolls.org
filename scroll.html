@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The GitScrolls - Scroll</title>
-    <link rel="icon" type="image/png" href="public/images/gitscrolls-01-01.png">
+    <link rel="icon" type="image/png" href="images/gitscrolls-01-01.png">
     
     <!-- Meta descriptions and SEO -->
     <meta name="description" content="Ancient wisdom for modern developers. Read the GitScrolls and discover timeless principles of software craftsmanship.">
@@ -16,14 +16,14 @@
     <meta property="og:url" content="https://gitscrolls.org/scroll.html">
     <meta property="og:title" content="The GitScrolls - Ancient Wisdom">
     <meta property="og:description" content="Discover the ancient wisdom of software development through the GitScrolls.">
-    <meta property="og:image" content="https://gitscrolls.org/public/images/gitscrolls-01-01.png">
+    <meta property="og:image" content="https://gitscrolls.org/images/gitscrolls-01-01.png">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://gitscrolls.org/scroll.html">
     <meta name="twitter:title" content="The GitScrolls - Ancient Wisdom">
     <meta name="twitter:description" content="Discover the ancient wisdom of software development through the GitScrolls.">
-    <meta name="twitter:image" content="https://gitscrolls.org/public/images/gitscrolls-01-01.png">
+    <meta name="twitter:image" content="https://gitscrolls.org/images/gitscrolls-01-01.png">
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1660,14 +1660,14 @@
                 
                 // Build hero image path from scroll number
                 const heroImages = {
-                    3: 'public/images/scroll-03-hero.png',
-                    4: 'public/images/scroll-04-hero.png',
-                    13: 'public/images/scroll-13-hero.png',
-                    15: 'public/images/scroll-15-hero.png'
+                    3: 'images/scroll-03-hero.png',
+                    4: 'images/scroll-04-hero.png',
+                    13: 'images/scroll-13-hero.png',
+                    15: 'images/scroll-15-hero.png'
                 };
                 
                 // Use specific hero image if available, otherwise use a default pattern
-                const heroImagePath = heroImages[scrollNum] || `public/images/scroll-${String(scrollNum).padStart(2, '0')}-01.png`;
+                const heroImagePath = heroImages[scrollNum] || `images/scroll-${String(scrollNum).padStart(2, '0')}-01.png`;
                 
                 // Update hero section
                 updateHeroSection(processed, heroImagePath);
@@ -2285,7 +2285,7 @@
                         imageDiv.className = 'section-divider';
                         imageDiv.innerHTML = `
                             <img class="divider-image lazy" 
-                                 data-src="public/images/${images[i]}" 
+                                 data-src="images/${images[i]}" 
                                  alt=""
                                  role="presentation"
                                  loading="lazy">
@@ -3073,12 +3073,12 @@
                 
                 // Update hero
                 const heroImages = {
-                    3: 'public/images/scroll-03-hero.png',
-                    4: 'public/images/scroll-04-hero.png',
-                    13: 'public/images/scroll-13-hero.png',
-                    15: 'public/images/scroll-15-hero.png'
+                    3: 'images/scroll-03-hero.png',
+                    4: 'images/scroll-04-hero.png',
+                    13: 'images/scroll-13-hero.png',
+                    15: 'images/scroll-15-hero.png'
                 };
-                const heroImagePath = heroImages[nextNum] || `public/images/scroll-${String(nextNum).padStart(2, '0')}-01.png`;
+                const heroImagePath = heroImages[nextNum] || `images/scroll-${String(nextNum).padStart(2, '0')}-01.png`;
                 
                 heroSection.style.backgroundImage = `
                     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
