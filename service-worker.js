@@ -6,6 +6,10 @@ const urlsToCache = [
     '/offline.html',
     '/404.html',
     '/src/markdown/markdown-processor-browser.js',
+    '/src/js/scroll-data.js',
+    '/src/components/toast.js',
+    '/src/components/dropdown.js',
+    '/src/components/loading.js',
     'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap',
     'https://cdn.jsdelivr.net/npm/marked/marked.min.js'
 ];
