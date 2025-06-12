@@ -7,20 +7,31 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "lint": "eslint src/**/*.js",
-    "format": "prettier --write .",
-    "serve": "npx http-server -p 8080"
+    "dev": "docker compose up --build",
+    "build": "docker compose run --rm gitscrolls npm run build:local",
+    "preview": "docker compose run --rm -p 4173:4173 gitscrolls npm run preview:local",
+    "test": "docker compose run --rm gitscrolls npm run test:local",
+    "test:watch": "docker compose run --rm gitscrolls npm run test:watch:local",
+    "lint": "docker compose run --rm gitscrolls npm run lint:local",
+    "format": "docker compose run --rm gitscrolls npm run format:local",
+    "dev:local": "vite",
+    "build:local": "vite build",
+    "preview:local": "vite preview",
+    "test:local": "jest",
+    "test:watch:local": "jest --watch",
+    "lint:local": "eslint src/**/*.js",
+    "format:local": "prettier --write .",
+    "serve": "npx http-server -p 8080",
+    "docker:down": "docker compose down",
+    "docker:build": "docker compose build",
+    "docker:logs": "docker compose logs -f",
+    "docker:exec": "docker compose exec gitscrolls"
   },
   "keywords": ["git", "wisdom", "scrolls", "developers"],
   "author": "J. Kirby Ross",
   "license": "CC-BY-NC-SA-4.0",
   "dependencies": {
-    "marked": "^16.0.3"
+    "marked": "^15.0.12"
   },
   "devDependencies": {
     "jest": "^29.7.0",
