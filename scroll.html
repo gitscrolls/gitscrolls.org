@@ -1083,6 +1083,66 @@
             font-size: 1.2rem;
             line-height: 1.8;
         }
+        
+        /* Error State Styles */
+        .error-state {
+            padding: 4rem 2rem;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .error-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .error-container h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--bronze);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .error-message {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .error-detail {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            font-family: monospace;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .error-help {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .error-help a {
+            color: var(--bronze);
+            text-decoration: none;
+        }
+        
+        .error-help a:hover {
+            text-decoration: underline;
+        }
 
         /* Bookmarks and Highlights */
         .bookmark-button {
@@ -2051,12 +2111,39 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 
             } catch (error) {
-                contentDiv.className = 'error';
+                console.error('Error loading scroll:', error);
+                contentDiv.className = 'error-state';
                 contentDiv.innerHTML = `
-                    <h2>The scroll could not be retrieved</h2>
-                    <p>${error.message}</p>
-                    <p>Perhaps the ancient servers are resting...</p>
+                    <div class="error-container">
+                        <h2>📜 Unable to Load Sacred Scroll</h2>
+                        <p class="error-message">The ancient wisdom could not be retrieved from the repository.</p>
+                        <p class="error-detail">${error.message || 'Connection to the sacred servers has been lost.'}</p>
+                        <div class="error-actions">
+                            <button onclick="location.reload()" class="btn btn-primary">
+                                Try Again
+                            </button>
+                            <a href="/" class="btn btn-secondary">
+                                Return to Index
+                            </a>
+                        </div>
+                        <p class="error-help">If this persists, consult the <a href="https://github.com/gitscrolls/gitscrolls/issues">Sacred Issues</a>.</p>
+                    </div>
                 `;
+                
+                // Update page title to reflect error
+                document.title = 'Error - The GitScrolls';
+                
+                // Hide loading spinner if visible
+                const loadingElement = document.querySelector('.loading-container');
+                if (loadingElement) {
+                    loadingElement.style.display = 'none';
+                }
+                
+                // Track error event
+                trackEvent('scroll_load_error', {
+                    scroll_number: scrollNum,
+                    error_message: error.message
+                });
             }
         }
 

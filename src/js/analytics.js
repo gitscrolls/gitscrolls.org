@@ -18,12 +18,12 @@ export class Analytics {
      */
     trackEvent(eventName, eventData = {}) {
         // Umami tracking
-        if (typeof umami !== 'undefined') {
-            umami.track(eventName, eventData);
+        if (typeof window !== 'undefined' && typeof window.umami !== 'undefined') {
+            window.umami.track(eventName, eventData);
         }
         
         // Console logging for development
-        if (process.env.NODE_ENV === 'development') {
+        if (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'development') {
             console.log('Analytics Event:', eventName, eventData);
         }
     }

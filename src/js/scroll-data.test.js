@@ -22,13 +22,13 @@ describe('Scroll Data Module', () => {
 
     describe('getHeroImage', () => {
         it('should return specific hero image if available', () => {
-            expect(getHeroImage(3)).toBe('public/images/scroll-03-hero.png');
-            expect(getHeroImage(4)).toBe('public/images/scroll-04-hero.png');
+            expect(getHeroImage(3)).toBe('images/scroll-03-hero.png');
+            expect(getHeroImage(4)).toBe('images/scroll-04-hero.png');
         });
 
         it('should return default pattern for others', () => {
-            expect(getHeroImage(1)).toBe('public/images/scroll-01-01.png');
-            expect(getHeroImage(5)).toBe('public/images/scroll-05-01.png');
+            expect(getHeroImage(1)).toBe('images/scroll-01-01.png');
+            expect(getHeroImage(5)).toBe('images/scroll-05-01.png');
         });
     });
 

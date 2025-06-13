@@ -76,38 +76,40 @@ export class Dropdown {
         const currentIndex = Array.from(items).findIndex(item => item === document.activeElement);
 
         switch(e.key) {
-            case 'Escape':
-                this.close();
-                this.toggle.focus();
-                break;
+        case 'Escape':
+            this.close();
+            this.toggle.focus();
+            break;
                 
-            case 'ArrowDown':
+        case 'ArrowDown': {
+            e.preventDefault();
+            const nextIndex = currentIndex + 1 < items.length ? currentIndex + 1 : 0;
+            items[nextIndex]?.focus();
+            break;
+        }
+                
+        case 'ArrowUp': {
+            e.preventDefault();
+            const prevIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
+            items[prevIndex]?.focus();
+            break;
+        }
+                
+        case 'Tab':
+            // Trap focus within dropdown
+            if (items.length > 0) {
                 e.preventDefault();
-                const nextIndex = currentIndex + 1 < items.length ? currentIndex + 1 : 0;
-                items[nextIndex]?.focus();
-                break;
-                
-            case 'ArrowUp':
-                e.preventDefault();
-                const prevIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
-                items[prevIndex]?.focus();
-                break;
-                
-            case 'Tab':
-                // Trap focus within dropdown
-                if (items.length > 0) {
-                    e.preventDefault();
-                    if (e.shiftKey) {
-                        // Shift+Tab: go to previous item
-                        const prevIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
-                        items[prevIndex]?.focus();
-                    } else {
-                        // Tab: go to next item
-                        const nextIndex = currentIndex + 1 < items.length ? currentIndex + 1 : 0;
-                        items[nextIndex]?.focus();
-                    }
+                if (e.shiftKey) {
+                    // Shift+Tab: go to previous item
+                    const prevIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
+                    items[prevIndex]?.focus();
+                } else {
+                    // Tab: go to next item
+                    const nextIndex = currentIndex + 1 < items.length ? currentIndex + 1 : 0;
+                    items[nextIndex]?.focus();
                 }
-                break;
+            }
+            break;
         }
     }
 

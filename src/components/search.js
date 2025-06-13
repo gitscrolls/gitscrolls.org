@@ -172,7 +172,7 @@ export class ScrollSearch {
         );
 
         let node;
-        while (node = walker.nextNode()) {
+        while ((node = walker.nextNode())) {
             const text = node.textContent;
             const regex = new RegExp(`(${term})`, 'gi');
             const parts = text.split(regex);

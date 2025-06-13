@@ -7,11 +7,11 @@
 - [x] **Fix image path inconsistencies** - Update `public/images/` references in scroll-data.js to `images/`
 - [x] **Remove duplicate footer** - Two footer elements in index.html (lines 750 & 905)
 - [x] **Add loading states** - No loading indicators when fetching markdown content
-- [ ] **Add error states** - No error handling for failed API calls or missing content
+- [x] **Add error states** - No error handling for failed API calls or missing content
 
 ### Missing Assets
-- [ ] **Fix missing background images** - All scroll card background images return 404 (assets/images/*.jpg)
-- [ ] **Fix hero image paths** - Hero images in scroll-data.js still use incorrect paths
+- [ ] **Fix missing background images** - All scroll card background images return 404 (assets/images/*.jpg) - See MISSING_IMAGES.md
+- [ ] **Fix hero image paths** - Hero images in scroll-data.js still use incorrect paths - See MISSING_IMAGES.md
 
 ## 🟡 High Priority Improvements
 
@@ -58,9 +58,14 @@
 ### Developer Experience
 - [ ] ~~Add component documentation~~ - Document component APIs and usage (NOT NEEDED)
 - [ ] ~~Create style guide~~ - Visual style guide for consistency (NOT NEEDED)
-- [ ] **Add E2E tests** - Automated testing for critical user flows
+- [x] **Add E2E tests** - Automated testing for critical user flows (Docker-based setup created)
 - [ ] **Implement analytics events** - Track user interactions beyond basic page views
 - [x] **Add social share buttons** - WhatsApp and Reddit added to existing Twitter, LinkedIn, Facebook, Email
+
+### Post-Deployment Tasks
+- [ ] **Deploy Umami Analytics** - Set up analytics instance (see UMAMI_DEPLOYMENT.md)
+- [ ] **Uncomment Umami script tags** - In index.html and scroll.html after deployment
+- [ ] **Add missing images** - See MISSING_IMAGES.md for complete list and locations
 
 ## 📝 Notes
 
